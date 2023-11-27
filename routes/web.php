@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +27,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/chat/{user}', [MessageController::class, 'show']);
+    Route::get('/chat', [MessageController::class, 'index']);
+    Route::get('/messages', [MessageController::class, 'fetch']);
+    Route::post('/messages', [MessageController::class, 'send']);
 });
